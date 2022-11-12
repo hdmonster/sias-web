@@ -60,7 +60,7 @@
             <span class="ml-2 d-none d-lg-inline-block">
               <span>Hello,</span>
               <span class="text-dark">
-                Admin
+                {{ Auth::user()->name }}
               </span>
               <i data-feather="chevron-down" class="svg-icon"></i>
             </span>
@@ -79,11 +79,14 @@
                 class="svg-icon mr-2 ml-1"></i>
               Account Setting</a>
             <div class="dropdown-divider"></div> --}}
-            <a class="dropdown-item" href="javascript:void(0)"><i data-feather="power" class="svg-icon mr-2 ml-1"></i>
-              Logout</a>
-            {{-- <div class="dropdown-divider"></div>
-            <div class="pl-4 p-3"><a href="javascript:void(0)" class="btn btn-sm btn-info">View
-                Profile</a></div> --}}
+            <a class="dropdown-item" href="javascript:void(0)" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i data-feather="power" class="svg-icon mr-2 ml-1"></i>
+                  Logout
+              </a>
+
+              <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+                  @csrf
+              </form>
+
           </div>
         </li>
         <!-- ============================================================== -->

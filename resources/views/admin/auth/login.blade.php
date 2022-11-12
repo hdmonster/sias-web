@@ -6,7 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!--===============================================================================================-->
-  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/logo-text.png">
   <!--===============================================================================================-->
   <link rel="stylesheet" type="text/css" href="/dist/vendor/bootstrap/css/bootstrap.min.css">
   <!--===============================================================================================-->
@@ -34,37 +34,48 @@
   <div class="limiter">
     <div class="container-login100">
       <div class="wrap-login100">
-        <form class="login100-form validate-form">
+        <form class="login100-form validate-form" action="{{ route('admin.authenticate') }}" method="POST">
+          @csrf
           <span class="login100-form-title p-b-26">
             Welcome Admin
           </span>
           <span class="login100-form-title p-b-48">
-            <i class="zmdi zmdi-font"></i>
+            <img src="/assets/images/logo-text.png" width="150px">
           </span>
-
-          <div class="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
-            <input class="input100" type="text" name="email">
-            <span class="focus-input100" data-placeholder="Email"></span>
-          </div>
-
-          <div class="wrap-input100 validate-input" data-validate="Enter password">
-            <span class="btn-show-pass">
-              <i class="zmdi zmdi-eye"></i>
-            </span>
-            <input class="input100" type="password" name="pass">
-            <span class="focus-input100" data-placeholder="Password"></span>
-          </div>
-
-          <div class="container-login100-form-btn">
-            <div class="wrap-login100-form-btn">
-              <div class="login100-form-bgbtn"></div>
-              <button class="login100-form-btn">
-                Login
-              </button>
+          @if(Session::has('error'))
+            <p style="color: red; text-align: center;"> {{ Session::get('error') }} </p>
+          @endif
+             
+            
+            <div class="form-group">
+              <div class="wrap-input100 validate-input">
+                <input class="input100 is-invalid" type="email" name="email" value="{{ old('email') }}">
+                <span class="focus-input100" data-placeholder="Email" required></span>
+              </div>
             </div>
-          </div>
 
-          <div class="text-center p-t-115">
+            <div class="form-group">
+              <div class="wrap-input100 validate-input" data-validate="Enter password" required>
+                <span class="btn-show-pass">
+                  <i class="zmdi zmdi-eye"></i>
+                </span>
+                <input class="input100" type="password" name="password">
+                <span class="focus-input100" data-placeholder="Password"></span>
+              </div>
+            </div>
+  
+            <div class="container-login100-form-btn">
+              <div class="wrap-login100-form-btn">
+                <div class="login100-form-bgbtn"></div>
+                <button class="login100-form-btn" type="submit">
+                  Login
+                </button>
+              </div>
+            </div>
+
+          </form>
+
+          <div class="text-center p-t-50">
             <span class="txt1">
               Don’t have an account? Contact your admin!
             </span>
