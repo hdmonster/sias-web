@@ -24,12 +24,20 @@
               <tr>
                 <td>{{ $academic_year->year }}</td>
                 <td>
-                  <button class="btn btn-circle btn-secondary mr-2">
+                  <a class="btn btn-circle btn-secondary mr-2" href="{{ route('admin.academic-years.edit', $academic_year->id) }}">
                     <i class="fa fa-edit"></i>
-                  </button>
-                  <button class="btn btn-circle btn-danger">
-                    <i class="fa fa-trash"></i>
-                  </button>
+                  </a>
+
+                  <div class="my-2">
+                    <form action="/admin/academic-years/{{ $academic_year->id }}" method="post">
+                      @method('delete')
+                      @csrf
+                      <button class="btn btn-circle btn-danger" type="submit"
+                        onclick="return confirm('Are you sure want to permanently deactivate this academic year?')">
+                        <i class="fa fa-trash"></i>
+                      </button>
+                    </form>
+                  </div>
                 </td>
               </tr>
 
