@@ -58,7 +58,7 @@ class StudentController extends Controller
 
         Student::create($validatedData);
 
-        return redirect('/admin/students');
+        return redirect('/admin/students')->with('success', 'Data berhasil ditambahkan!');
     }
 
     /**
@@ -117,7 +117,7 @@ class StudentController extends Controller
 
         $student->update($validatedData);
 
-        return redirect('/admin/students');
+        return redirect('/admin/students')->with('success', 'Data berhasil diperbarui!');
     }
 
     /**
@@ -130,7 +130,7 @@ class StudentController extends Controller
     {
         $student->delete();
 
-        return redirect('/admin/students');
+        return redirect('/admin/students')->with('success', 'Data berhasil dihapus!');
     }
 
     public function assignClassIndex()

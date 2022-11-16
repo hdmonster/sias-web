@@ -179,7 +179,7 @@
           <div class="form-actions">
             <div class="text-right">
               <button type="reset" class="btn btn-dark">Reset</button>
-              <button type="submit" class="btn btn-primary">Update</button>
+              <button type="submit" class="btn btn-success">Update</button>
             </div>
           </div>
         </div>

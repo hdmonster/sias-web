@@ -114,6 +114,6 @@ class TeacherController extends Controller
     {
         $teacher->update(['status' => 'inactive']);
 
-        return redirect('/admin/teachers');
+        return redirect('/admin/teachers')->with('success', 'Data berhasil di non-aktivasi!');
     }
 }
