@@ -19,7 +19,7 @@
               data-feather="file-text" class="feather-icon"></i><span class="user">Teachers </span></a>
           <ul aria-expanded="false" class="collapse  first-level base-level-line">
             <li class="sidebar-item">
-              <a href="#" class="sidebar-link" data-toggle="modal" data-target="#addTeacherModal">
+              <a href="{{ route('admin.teachers.create') }}" class="sidebar-link" >
                 <span class="hide-menu"> Add new
                 </span>
               </a>

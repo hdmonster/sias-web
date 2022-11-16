@@ -7,9 +7,6 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Teachers</h4>
-        <h6 class="card-subtitle">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, reiciendis.
-        </h6>
         <div class="table-responsive">
           <table id="default_order" class="table table-striped table-bordered display no-wrap" style="width:100%">
             <thead>
@@ -42,10 +39,9 @@
                   @endif
                 </td>
                 <td>
-                  <button class="btn btn-circle btn-secondary mr-2" data-id="{{ $teacher->id }}" data-toggle="modal"
-                    data-target="#editTeacherModal">
+                  <a class="btn btn-circle btn-secondary mr-2" href="{{ route('admin.teachers.edit', $teacher->id) }}">
                     <i class="fa fa-edit"></i>
-                  </button>
+                  </a>
 
                   <div class="my-2">
                     <form action="/admin/teachers/{{ $teacher->id }}" method="post">
@@ -78,8 +74,6 @@
     </div>
   </div>
 </div>
-
-@include('admin.components.teacher.edit')
 
 @push('scripts')
 <script src="/assets/extra-libs/datatables.net/js/jquery.dataTables.min.js"></script>

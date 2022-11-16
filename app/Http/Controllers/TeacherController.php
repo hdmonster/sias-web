@@ -51,7 +51,7 @@ class TeacherController extends Controller
 
         Teacher::create($validatedData);
 
-        return redirect('/admin/teachers');
+        return redirect('/admin/teachers')->with('success', 'Data berhasil ditambahkan!');
     }
 
     /**
@@ -73,7 +73,10 @@ class TeacherController extends Controller
      */
     public function edit(Teacher $teacher)
     {
-        //
+        return view('admin.teachers.edit', [
+            'title' => 'Edit Teacher',
+            'teacher' => $teacher
+        ]);
     }
 
     /**
@@ -98,7 +101,7 @@ class TeacherController extends Controller
 
       $teacher->update($validatedData); 
 
-      return redirect('/admin/teachers');
+      return redirect('/admin/teachers')->with('success', 'Data berhasil diperbarui!');
     }
 
     /**
