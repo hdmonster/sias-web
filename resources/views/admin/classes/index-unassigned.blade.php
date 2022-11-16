@@ -24,13 +24,20 @@
               <tr>
                 <td>{{ $class->class_name }}</td>
                 <td>
-                  <button class="btn btn-circle btn-secondary mr-2" data-id="{{ $class->id }}" data-toggle="modal"
-                    data-target="#editClassModal">
+                  <a class="btn btn-circle btn-secondary mr-2" href="{{ route('admin.classes.edit', $class->id) }}">
                     <i class="fa fa-edit"></i>
-                  </button>
-                  <button class="btn btn-circle btn-danger">
-                    <i class="fa fa-trash"></i>
-                  </button>
+                  </a>
+
+                  <div class="my-2">
+                    <form action="/admin/classes/{{ $class->id }}" method="post">
+                      @method('delete')
+                      @csrf
+                      <button class="btn btn-circle btn-danger" type="submit"
+                        onclick="return confirm('Are you sure want to permanently deactivate this class?')">
+                        <i class="fa fa-trash"></i>
+                      </button>
+                    </form>
+                  </div>
                 </td>
               </tr>
 

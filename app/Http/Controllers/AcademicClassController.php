@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AcademicClass;
-use App\Http\Requests\StoreAcademicClassRequest;
-use App\Http\Requests\UpdateAcademicClassRequest;
+use Illuminate\Http\Request;
 
 class AcademicClassController extends Controller
 {
@@ -28,7 +27,9 @@ class AcademicClassController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.classes.create', [
+            'title' => 'Add Class',
+        ]);
     }
 
     /**
@@ -37,9 +38,15 @@ class AcademicClassController extends Controller
      * @param  \App\Http\Requests\StoreAcademicClassRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreAcademicClassRequest $request)
+    public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'class_name' => 'required',
+        ]);
+
+        AcademicClass::create($validatedData);
+
+        return redirect('/admin/classes')->with('success', 'Data berhasil ditambahkan!');
     }
 
     /**
@@ -60,9 +67,13 @@ class AcademicClassController extends Controller
      * @param  \App\Models\AcademicClass  $academicClass
      * @return \Illuminate\Http\Response
      */
-    public function edit(AcademicClass $academicClass)
+    public function edit($id)
     {
-        //
+        $class = AcademicClass::find($id);
+        return view('admin.classes.edit', [
+            'title' => 'Edit Class',
+            'class' => $class
+        ]);
     }
 
     /**
@@ -72,9 +83,17 @@ class AcademicClassController extends Controller
      * @param  \App\Models\AcademicClass  $academicClass
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateAcademicClassRequest $request, AcademicClass $academicClass)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'class_name' => 'required'
+        ]);
+
+        $class = AcademicClass::find($id);
+
+        $class->update(['class_name' => $request->class_name]);
+
+        return redirect('/admin/classes')->with('success', 'Data berhasil diperbarui!');
     }
 
     /**
@@ -83,8 +102,10 @@ class AcademicClassController extends Controller
      * @param  \App\Models\AcademicClass  $academicClass
      * @return \Illuminate\Http\Response
      */
-    public function destroy(AcademicClass $academicClass)
+    public function destroy($id)
     {
-        //
+        $class = AcademicClass::find($id);
+        $class->delete();
+        return redirect('/admin/classes')->with('success', 'Data berhasil dihapus!');
     }
 }

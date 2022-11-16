@@ -21,7 +21,7 @@
 
                 <div class="form-group">
                     <label for="atNip">NIP</label>
-                    <input type="number" class="form-control @error('nip') is-invalid @enderror" id="atNip" name="nip" value="{{ old('nip', $teacher->nip) }}">
+                    <input type="number" class="form-control @error('nip') is-invalid @enderror" id="atNip" name="nip" value="{{ old('nip') }}">
                     @error('nip')
                         <span class="invalid-feedback">{{ $message }}</span>
                     @enderror
