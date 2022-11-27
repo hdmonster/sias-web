@@ -28,12 +28,20 @@
                 <td>{{ count($class->studentClasses) }}</td>
                 <td>{{ $class->academicYear->year }}</td>
                 <td>
-                  <button class="btn btn-circle btn-secondary mr-2">
+                  <a class="btn btn-circle btn-secondary mr-2" href="{{ route('admin.academic-classes.edit', $class->id) }}">
                     <i class="fa fa-edit"></i>
-                  </button>
-                  <button class="btn btn-circle btn-danger">
-                    <i class="fa fa-trash"></i>
-                  </button>
+                  </a>
+
+                  <div class="my-2">
+                    <form action="{{ route('admin.academic-classes.destroy', $class->id) }}" method="post">
+                      @method('delete')
+                      @csrf
+                      <button class="btn btn-circle btn-danger" type="submit"
+                        onclick="return confirm('Are you sure want to permanently delete this class?')">
+                        <i class="fa fa-trash"></i>
+                      </button>
+                    </form>
+                  </div>
                 </td>
               </tr>
 

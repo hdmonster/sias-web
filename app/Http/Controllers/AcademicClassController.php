@@ -46,7 +46,7 @@ class AcademicClassController extends Controller
 
         AcademicClass::create($validatedData);
 
-        return redirect('/admin/classes')->with('success', 'Data berhasil ditambahkan!');
+        return redirect('/admin/classes')->with('success', 'Data successfully added!!');
     }
 
     /**
@@ -93,7 +93,7 @@ class AcademicClassController extends Controller
 
         $class->update(['class_name' => $request->class_name]);
 
-        return redirect('/admin/classes')->with('success', 'Data berhasil diperbarui!');
+        return redirect('/admin/classes')->with('success', 'Data successfully updated!');
     }
 
     /**
@@ -106,6 +106,6 @@ class AcademicClassController extends Controller
     {
         $class = AcademicClass::find($id);
         $class->delete();
-        return redirect('/admin/classes')->with('success', 'Data berhasil dihapus!');
+        return redirect('/admin/classes')->with('success', 'Data successfully deleted!');
     }
 }

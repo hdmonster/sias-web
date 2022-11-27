@@ -82,7 +82,7 @@
           </a>
           <ul aria-expanded="false" class="collapse first-level base-level-line">
             <li class="sidebar-item">
-              <a href="#" class="sidebar-link" data-toggle="modal" data-target="#addAcademicClassModal">
+              <a href="{{ route('admin.academic-classes.create') }}" class="sidebar-link">
                 <span class="hide-menu">
                   Add Academic Class
                 </span>
