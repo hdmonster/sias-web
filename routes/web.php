@@ -4,6 +4,7 @@ use App\Models\Student;
 use App\Models\Teacher;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\StudentAuthController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\AdminAuthController;
@@ -29,11 +30,7 @@ Route::redirect('/','/admin');
 
 
 
-Route::get('/student/login', function() {
-    return view('student.auth.login', [
-        'title' => 'Login'
-    ]);
-})->name('student.login');
+
 
 Route::get('/admin/login', [AdminAuthController::class, 'viewLogin'])->name('login');
 Route::post('/admin/login', [AdminAuthController::class, 'authenticate'])->name('admin.authenticate');
@@ -82,12 +79,19 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
 
 
 Route::group(['prefix' => 'student', 'as' => 'students.'], function(){
-    Route::get('/', function () {
-        return view('student.dashboard.index', [
-            'title' => 'Dashboard'
-        ]);
-    });
 
-    Route::get('/rapor/{academicClassYearId}/score', [StudentAcademicScoreController::class,'rapor']);
-    Route::get('/rapor/{academicClassYearId}/performance', [StudentAcademicScoreController::class, 'performance']);
+    Route::get('/login', [StudentAuthController::class, 'getLogin'])->name('login');
+    Route::post('/login', [StudentAuthController::class, 'authenticate'])->name('authenticate');
+    Route::post('/logout', [StudentAuthController::class, 'logout'])->name('logout');
+    
+    Route::middleware('auth:student')->group(function(){
+        Route::get('/dashboard', function () {
+            return view('student.dashboard.index', [
+                'title' => 'Dashboard'
+            ]);
+        })->name('dashboard');
+    
+        Route::get('/rapor/{academicClassYearId}/score', [StudentAcademicScoreController::class,'rapor']);
+        Route::get('/rapor/{academicClassYearId}/performance', [StudentAcademicScoreController::class, 'performance']);
+    });
 });

@@ -4,9 +4,9 @@
 
 <div class="card">
   <div class="card-body collapse show">
-    <h4 class="card-title mb-4">Leland Kein</h4>
+    <h4 class="card-title mb-4">{{ Auth::guard('student')->user()->name }}</h4>
     <p class="card-text">
-      Class VII A
+      Class {{ Auth::guard('student')->user()->studentClasses->first()->academicClassYear->academicClass->class_name }}
     </p>
   </div>
 </div>
