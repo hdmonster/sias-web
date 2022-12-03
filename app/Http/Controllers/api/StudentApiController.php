@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Models\Student;
+use App\Models\Subject;
 use Illuminate\Http\Request;
 use App\Models\AcademicClass;
 use App\Models\StudentClass;
@@ -171,6 +172,45 @@ class StudentApiController extends Controller
         return response()->json([
             'labels' => $academicClasses,
             'scores' => $academicScoreAverage
+        ]);
+    }
+
+    public function allSubject(){
+        $subjects = Subject::all();
+        $academicScores = AcademicScore::all();
+        $academicScoresAverage = [];
+
+        // foreach ($academicScores as $academicScore) {
+        //     $count = 0;
+        //     foreach ($academicScore->pluck('score') as $value) {
+        //         $count += $value;
+        //     }
+        //     $average = $count / count($academicScore->pluck('score'));
+        //     $academicScoresAverage[$academicScore->pluck('subject_id')] = $average;
+        //     // echo $academicScore->pluck('score') . '<br><br><br>';
+        // }
+
+        foreach ($subjects as $subject) {
+            $i = 0;
+            $count = 0;
+            foreach ($subject->subjectScores as $value) {
+                $count += $value->score;
+                $i += 1;
+                // echo $subject->subject_name . ' : ' .$value->score . '<br>';
+            };
+
+            if ($i == 0 && $count == 0){
+                $average = 0;
+            }else{
+                $average = $count/$i;
+            }
+            array_push($academicScoresAverage, $average);
+            // $academicScoresAverage = $average;
+        }
+
+        return response()->json([
+            'labels' => $subjects->pluck('subject_name'),
+            'scores' => $academicScoresAverage
         ]);
     }
 }

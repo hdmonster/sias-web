@@ -2,6 +2,7 @@
 
 use App\Models\Student;
 use App\Models\Teacher;
+use App\Models\AcademicScore;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\StudentAuthController;
@@ -41,8 +42,19 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
 
     Route::middleware('auth')->group(function(){
         Route::get('/', function () {
+            $academicScores = AcademicScore::all();
+            $count = 0;
+            $i = 0;
+
+            foreach ($academicScores as $academicScore) {
+                $count += $academicScore->score;
+                $i += 1;
+            }
+            $rate = (2 * $count)/$i;
+
             return view('admin.dashboard.index', [
                 'title' => 'Dashboard',
+                'rate' => $rate,
                 'total_students' => Student::all()->count(),
                 'total_teachers' => Teacher::all()->count()
             ]);

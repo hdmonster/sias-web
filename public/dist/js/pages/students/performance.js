@@ -117,7 +117,6 @@ $(function () {
 
 
 
-
   $(window).on('resize', function () {
       chart.update();
   });

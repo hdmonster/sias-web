@@ -1,85 +1,58 @@
 $(function () {
 
-    // ==============================================================
-    // Campaign
-    // ==============================================================
-
-    var chart1 = c3.generate({
-        bindto: '#campaign-v2',
-        data: {
-            columns: [
-                ['Direct Sales', 25],
-                ['Referral Sales', 15],
-                ['Afilliate Sales', 10],
-                ['Indirect Sales', 15]
-            ],
-
-            type: 'donut',
-            tooltip: {
-                show: true
-            }
-        },
-        donut: {
-            label: {
-                show: false
-            },
-            title: 'Sales',
-            width: 18
-        },
-
-        legend: {
-            hide: true
-        },
-        color: {
-            pattern: [
-                '#edf2f6',
-                '#5f76e8',
-                '#ff4f70',
-                '#01caf1'
-            ]
-        }
-    });
-
-    d3.select('#campaign-v2 .c3-chart-arcs-title').style('font-family', 'Rubik');
-
-    // ============================================================== 
-    // income
-    // ============================================================== 
-    var data = {
-        labels: ['Math', 'Social', 'Magic & Spells', 'Science'],
-        series: [
-            [82,85,87,70]
-        ]
-    };
-
-    var options = {
-        axisX: {
-            showGrid: false
-        },
-        seriesBarDistance: 1,
-        chartPadding: {
-            top: 15,
-            right: 15,
-            bottom: 5,
-            left: 0
-        },
-        plugins: [
-            Chartist.plugins.tooltip()
-        ],
-        width: '100%'
-    };
-
-    var responsiveOptions = [
-        ['screen and (max-width: 640px)', {
-            seriesBarDistance: 5,
+      // =============
+      // Bar Chart
+      // =============
+      async function getDataSubjectScore(apiSubjectScore){
+        let response = await fetch(apiSubjectScore)
+        let data = await response.json()  
+        let labels = data.labels;
+        let scores = data.scores;
+        // console.log(scores)
+        // console.log(Object.values(scores.final_term))
+        subjectChart(labels,scores)
+    
+        // academicChart(labels, scores)
+      }
+      getDataSubjectScore(apiSubjectScore)
+    
+      function subjectChart(labels,scores){
+        var data = {
+          labels: labels,
+          series: [
+              scores
+          ]
+        };
+      
+        var options = {
             axisX: {
-                labelInterpolationFnc: function (value) {
-                    return value[0];
+                showGrid: false
+            },
+            seriesBarDistance: 1,
+            chartPadding: {
+                top: 15,
+                right: 15,
+                bottom: 5,
+                left: 0
+            },
+            plugins: [
+                Chartist.plugins.tooltip()
+            ],
+            width: '100%'
+        };
+      
+        var responsiveOptions = [
+            ['screen and (max-width: 640px)', {
+                seriesBarDistance: 5,
+                axisX: {
+                    labelInterpolationFnc: function (value) {
+                        return value[0];
+                    }
                 }
-            }
-        }]
-    ];
-    new Chartist.Bar('.net-income', data, options, responsiveOptions);
+            }]
+        ];
+        new Chartist.Bar('.net-income', data, options, responsiveOptions);
+      }
 
     // ============================================================== 
     // Visit By Location
