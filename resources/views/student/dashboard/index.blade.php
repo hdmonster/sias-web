@@ -2,39 +2,45 @@
 
 @section('content')
 
-<div class="card">
-  <div class="card-body collapse show">
-    <h4 class="card-title mb-4">{{ Auth::guard('student')->user()->name }}</h4>
-    <p class="card-text">
-      Class {{ Auth::guard('student')->user()->studentClasses->first()->academicClassYear->academicClass->class_name }}
-    </p>
-  </div>
-</div>
 
 <div class="row row-cols-2">
   <div class="col">
     <div class="card">
-      <div class="card-body">
-        <div class="d-flex align-items-start">
-          <h4 class="card-title mb-0">Academic Performance (2.0)</h4>
-          <div class="ml-auto">
-          </div>
-        </div>
-        <div class="pl-4 mb-5">
-          <div class="stats ct-charts position-relative" style="height: 315px;"></div>
-        </div>
-        <ul class="list-inline text-center mt-4 mb-0">
-          <li class="list-inline-item text-muted font-italic">
-            Academic performance for this year
-          </li>
-        </ul>
+      <div class="card-body collapse show">
+        <h4 class="card-title mb-4">{{ Auth::guard('student')->user()->name }}</h4>
+        <table class="table" width="100%">
+          <tr>
+            <td>Class</td>
+            <td>{{ Auth::guard('student')->user()->studentClasses->first()->academicClassYear->academicClass->class_name }}</td>
+          </tr>
+          <tr>
+            <td>Gender</td>
+            <td>{{ Str::title(Auth::guard('student')->user()->gender) }}</td>
+          </tr>
+          <tr>
+            <td>Birthplace</td>
+            <td>{{ Auth::guard('student')->user()->birth_place_and_date }}</td>
+          </tr>
+          <tr>
+            <td>Address</td>
+            <td>{{ Auth::guard('student')->user()->address }}</td>
+          </tr>
+          <tr>
+            <td>Religion</td>
+            <td>{{ Str::title(Auth::guard('student')->user()->religion) }}</td>
+          </tr>
+          <tr>
+            <td>Parent</td>
+            <td>{{ Auth::guard('student')->user()->parent_name }} <br> {{ Auth::guard('student')->user()->parent_mobile }}</td>
+          </tr>
+        </table>
       </div>
     </div>
   </div>
   <div class="col">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Strength & Weakness</h4>
+        <h4 class="card-title">Academic Performance</h4>
         <canvas id="radar-chart" height="300" width="300"></canvas>
       </div>
     </div>
@@ -53,5 +59,9 @@
 <script src="/dist/js/pages/dashboards/dashboard1.js"></script>
 
 <script src="/assets/libs/chart.js/dist/Chart.min.js"></script>
+<script>
+  let apiPerformance = '/api/students/performance/{{ Auth::guard("student")->user()->id }}';
+  let apiSubjectScore = '/api/students/subject/{{ Auth::guard("student")->user()->id }}';
+</script>
 <script src="/dist/js/pages/students/performance.js"></script>
 @endpush

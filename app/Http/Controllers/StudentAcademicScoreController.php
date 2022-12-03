@@ -8,12 +8,14 @@ use Illuminate\Http\Request;
 use App\Models\AcademicScore;
 use App\Models\AcademicClassYear;
 use App\Http\Controllers\Controller;
+use Auth;
 
 class StudentAcademicScoreController extends Controller
 {
     public function rapor($academicClassYearId)
     {
-        $studentId = 1;
+        $academicClasses = [];
+        $studentId = Auth::guard('student')->user()->id;
 
         $subjects = Subject::all();
 
@@ -28,12 +30,21 @@ class StudentAcademicScoreController extends Controller
         ->get()
         ->groupBy('subject_id');
         
+        foreach ($studentScores as $studentScore) {
+            foreach ($studentScore as $value) {
+                if(!in_array($value->subject->subject_name, $academicClasses)){
+                    array_push($academicClasses, $value->subject->subject_name);
+                }
+            }
+        }
+
         return view('student.rapor.index', [
             'title' => 'Class  ' . $className . ' Score',
             'academicClassYearId' => $academicClassYearId,
             'className' => $className,
             'studentScores' => $studentScores,
-            'subjects' => $subjects
+            'subjects' => $subjects,
+            'academicClasses' => $academicClasses,
         ]);
     }
 

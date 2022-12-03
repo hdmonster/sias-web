@@ -24,6 +24,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
     
+Route::get('/students/performance/{id}', [StudentApiController::class, 'performance']);
+Route::get('/students/subject/{id}', [StudentApiController::class, 'subject']);
 Route::resource('/students', StudentApiController::class);
 Route::resource('/teachers', TeacherApiController::class);
 Route::get('/classes', [ClassApiController::class, 'index']);

@@ -49,5 +49,9 @@
 <script src="/assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
 
 <script src="/assets/libs/chart.js/dist/Chart.min.js"></script>
+<script>
+  let apiPerformance = '/api/students/performance/{{ Auth::guard("student")->user()->id }}';
+  let apiSubjectScore = '/api/students/subject/{{ Auth::guard("student")->user()->id }}';
+</script>
 <script src="/dist/js/pages/students/performance.js"></script>
 @endpush
