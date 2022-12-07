@@ -82,7 +82,7 @@
           </a>
           <ul aria-expanded="false" class="collapse first-level base-level-line">
             <li class="sidebar-item">
-              <a href="{{ route('admin.academic-years.create') }}" class="sidebar-link">
+              <a href="{{ route('admin.academic-classes.create') }}" class="sidebar-link">
                 <span class="hide-menu">
                   Add Academic Class
                 </span>
@@ -201,22 +201,57 @@
         </li>
 
         <li class="sidebar-item">
-          <a class="sidebar-link sidebar-link" href="/admin/subjects" aria-expanded="false">
-            <i data-feather="clipboard" class="feather-icon">
-            </i>
-            <span class="hide-menu">Subjects
+          <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+            <i data-feather="clipboard" class="feather-icon"></i>
+            <span class="hide-menu">
+              Subjects
             </span>
           </a>
+          <ul aria-expanded="false" class="collapse first-level base-level-line">
+            <li class="sidebar-item">
+              <a href="{{ route('admin.subjects.create') }}" class="sidebar-link">
+                <span class="hide-menu">
+                  Add Subject
+                </span>
+              </a>
+            </li>
+
+            <li class="sidebar-item">
+              <a href="/admin/subjects" class="sidebar-link">
+                <span class="hide-menu">
+                  View All
+                </span>
+              </a>
+            </li>
+          </ul>
         </li>
 
         <li class="sidebar-item">
-          <a class="sidebar-link sidebar-link" href="/admin/academic-years" aria-expanded="false">
-            <i data-feather="calendar" class="feather-icon">
-            </i>
-            <span class="hide-menu">Academic Year
+          <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+            <i data-feather="calendar" class="feather-icon"></i>
+            <span class="hide-menu">
+              Academic Years
             </span>
           </a>
+          <ul aria-expanded="false" class="collapse first-level base-level-line">
+            <li class="sidebar-item">
+              <a href="{{ route('admin.academic-years.create') }}" class="sidebar-link">
+                <span class="hide-menu">
+                  Add Academic Year
+                </span>
+              </a>
+            </li>
+
+            <li class="sidebar-item">
+              <a href="/admin/academic-years" class="sidebar-link">
+                <span class="hide-menu">
+                  View All
+                </span>
+              </a>
+            </li>
+          </ul>
         </li>
+
 
       </ul>
     </nav>

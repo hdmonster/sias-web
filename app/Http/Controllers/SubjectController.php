@@ -27,7 +27,9 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.subjects.create', [
+            'title' => 'Add Subject',
+        ]);
     }
 
     /**
@@ -38,7 +40,17 @@ class SubjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'subject_name' => 'required',
+            'minimum_score' => 'required',
+        ]);
+
+        $subject = Subject::create([
+            'subject_name' => $request->subject_name,
+            'minimum_score' => $request->minimum_score
+        ]);
+
+        return redirect('/admin/subjects')->with('success', 'Data telah berhasil ditambahkan.');
     }
 
     /**
@@ -60,7 +72,10 @@ class SubjectController extends Controller
      */
     public function edit(Subject $subject)
     {
-        //
+        return view('admin.subjects.edit', [
+            'title' => 'Edit Subject',
+            'subject' => $subject
+        ]);
     }
 
     /**
@@ -72,7 +87,17 @@ class SubjectController extends Controller
      */
     public function update(Request $request, Subject $subject)
     {
-        //
+        $this->validate($request,[
+            'subject_name' => 'required',
+            'minimum_score' => 'required',
+        ]);
+
+        $subject->update([
+            'subject_name' => $request->subject_name,
+            'minimum_score' => $request->minimum_score
+        ]);
+
+        return redirect('/admin/subjects')->with('success', 'Data telah berhasil diperbarui.');
     }
 
     /**
@@ -83,6 +108,7 @@ class SubjectController extends Controller
      */
     public function destroy(Subject $subject)
     {
-        //
+        $subject->delete();
+        return redirect('/admin/subjects')->with('success', 'Data telah berhasil dihapus.');
     }
 }

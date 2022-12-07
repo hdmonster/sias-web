@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\StudentClass;
 use Illuminate\Http\Request;
 use App\Models\AcademicClass;
+use App\Models\AcademicYear;
 use App\Models\ClassHomeTeacher;
 use App\Models\AcademicClassYear;
 use App\Http\Controllers\Controller;
@@ -37,9 +38,14 @@ class AcademicClassYearController extends Controller
      */
     public function create()
     {
-      return view('admin.classes.academic.create', [
-        'title' => 'Add Academic Class',
-      ]);
+        $academicClasses = AcademicClass::all();
+        $academicYears = AcademicYear::all();
+
+        return view('admin.classes.academic.create', [
+            'title' => 'Add Academic Class',
+            'academicClasses' => $academicClasses,
+            'academicYears' => $academicYears
+        ]);
     }
 
     /**
@@ -55,7 +61,7 @@ class AcademicClassYearController extends Controller
             'academic_year_id'  => $request->academic_year_id
         ]);
 
-        return redirect('/admin/academic-classes');
+        return redirect('/admin/academic-classes')->with('success', 'Data successfully added.');
     }
 
     /**
@@ -75,9 +81,19 @@ class AcademicClassYearController extends Controller
      * @param  \App\Models\AcademicClassYear  $academicClassYear
      * @return \Illuminate\Http\Response
      */
-    public function edit(AcademicClassYear $academicClassYear)
+    public function edit($id)
     {
-        //
+        $academicClassYear = AcademicClassYear::find($id);
+        // dd($academicClassYear);
+        $academicClasses = AcademicClass::all();
+        $academicYears = AcademicYear::all();
+
+        return view('admin.classes.academic.edit', [
+            'title' => 'Edit Academic Class',
+            'academicClasses' => $academicClasses,
+            'academicYears' => $academicYears,
+            'academicClassYear' => $academicClassYear,
+        ]);
     }
 
     /**
@@ -87,9 +103,17 @@ class AcademicClassYearController extends Controller
      * @param  \App\Models\AcademicClassYear  $academicClassYear
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, AcademicClassYear $academicClassYear)
+    public function update(Request $request, $id)
     {
-        //
+        $academicClassYear = AcademicClassYear::find($id);
+
+        $academicClassYear->update([
+            'academic_class_id' => $request->academic_class_id,
+            'academic_year_id' => $request->academic_year_id,
+        ]);
+
+        return redirect('/admin/academic-classes')->with('success', 'Data successfully updated!');
+
     }
 
     /**
@@ -98,9 +122,12 @@ class AcademicClassYearController extends Controller
      * @param  \App\Models\AcademicClassYear  $academicClassYear
      * @return \Illuminate\Http\Response
      */
-    public function destroy(AcademicClassYear $academicClassYear)
+    public function destroy($id)
     {
-        //
+        $academicClassYear = AcademicClassYear::find($id);
+        $academicClassYear->delete();
+
+        return redirect('/admin/academic-classes')->with('success', 'Data successfully deleted!');
     }
 
     public function transfer()
@@ -119,14 +146,16 @@ class AcademicClassYearController extends Controller
 
     public function transferClass(Request $request)
     {
+        // dd($request->all());
         $students = StudentClass::where([
             'academic_class_year_id' => $request->academic_class_year_id_to_transfer,
         ])->get();
 
+        // dd($students);
         foreach ($students as $student) {
             StudentClass::create([
                 'academic_class_year_id' => $request->academic_class_year_id,
-                'student_id' => $student->id
+                'student_id' => $student->student_id
             ]);
         }
 

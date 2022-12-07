@@ -7,9 +7,9 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Subjects</h4>
-        <h6 class="card-subtitle">
+        <!-- <h6 class="card-subtitle">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, reiciendis.
-        </h6>
+        </h6> -->
         <div class="table-responsive">
           <table id="default_order" class="table table-striped table-bordered display no-wrap" style="width:100%">
             <thead>
@@ -26,12 +26,20 @@
                 <td class="text-capitalize">{{ $subject->subject_name }}</td>
                 <td>{{ $subject->minimum_score }}</td>
                 <td>
-                  <button class="btn btn-circle btn-secondary mr-2">
+                  <a class="btn btn-circle btn-secondary mr-2" href="{{ route('admin.subjects.edit', $subject->id) }}">
                     <i class="fa fa-edit"></i>
-                  </button>
-                  <button class="btn btn-circle btn-danger">
-                    <i class="fa fa-trash"></i>
-                  </button>
+                  </a>
+
+                  <div class="my-2">
+                    <form action="/admin/subjects/{{ $subject->id }}" method="post">
+                      @method('delete')
+                      @csrf
+                      <button class="btn btn-circle btn-danger" type="submit"
+                        onclick="return confirm('Are you sure want to permanently deactivate this subject?')">
+                        <i class="fa fa-trash"></i>
+                      </button>
+                    </form>
+                  </div>
                 </td>
               </tr>
 

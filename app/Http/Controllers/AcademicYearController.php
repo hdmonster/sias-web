@@ -27,7 +27,9 @@ class AcademicYearController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.academic-years.create', [
+            'title' => 'Add Academic Year',
+        ]);
     }
 
     /**
@@ -38,7 +40,15 @@ class AcademicYearController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'year' => 'required|unique:academic_years',
+        ]);
+
+        $academicYear = AcademicYear::create([
+            'year' => $request->year,
+        ]);
+
+        return redirect('/admin/academic-years')->with('success', 'Data telah berhasil ditambahkan.');
     }
 
     /**
@@ -60,7 +70,10 @@ class AcademicYearController extends Controller
      */
     public function edit(AcademicYear $academicYear)
     {
-        //
+        return view('admin.academic-years.edit', [
+            'title' => 'Academic Years',
+            'academic_year' => $academicYear
+        ]);
     }
 
     /**
@@ -72,7 +85,15 @@ class AcademicYearController extends Controller
      */
     public function update(Request $request, AcademicYear $academicYear)
     {
-        //
+        $this->validate($request,[
+            'year' => 'required|unique:academic_years,year,' . $academicYear->id,
+        ]);
+
+        $academicYear->update([
+            'year' => $request->year,
+        ]);
+
+        return redirect('/admin/academic-years')->with('success', 'Data telah berhasil diperbarui.');
     }
 
     /**
@@ -83,6 +104,7 @@ class AcademicYearController extends Controller
      */
     public function destroy(AcademicYear $academicYear)
     {
-        //
+        $academicYear->delete();
+        return redirect('/admin/academic-years')->with('success', 'Data telah berhasil dihapus.');
     }
 }

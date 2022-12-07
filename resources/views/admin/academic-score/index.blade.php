@@ -8,9 +8,9 @@
       <div class="card-body">
         <h3>{{ ucwords($subjectName) }}</h3>
         <h4 class="card-title">Students Academic Score</h4>
-        <h6 class="card-subtitle">
+        <!-- <h6 class="card-subtitle">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, reiciendis.
-        </h6>
+        </h6> -->
         <div class="table-responsive">
           <table id="default_order" class="table table-striped table-bordered display no-wrap" style="width:100%">
             <thead>

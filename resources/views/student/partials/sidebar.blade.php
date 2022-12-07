@@ -5,7 +5,7 @@
     <nav class="sidebar-nav">
       <ul id="sidebarnav">
         <li class="sidebar-item">
-          <a class="sidebar-link sidebar-link selected" href="/student" aria-expanded="false">
+          <a class="sidebar-link sidebar-link selected" href="/student/dashboard" aria-expanded="false">
             <i data-feather="home" class="feather-icon"></i>
             <span class="hide-menu">Dashboard</span>
           </a>
