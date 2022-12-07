@@ -17,13 +17,13 @@ class AcademicClassYearController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
+    {
         $academicClassYears = AcademicClassYear::with([
             'studentClasses',
             'academicClass',
             'academicYear'
         ])->get();
-        
+
         return view('admin.classes.index', [
             'title' => 'Academic Class',
             'classes' => $academicClassYears
@@ -37,7 +37,9 @@ class AcademicClassYearController extends Controller
      */
     public function create()
     {
-        //
+      return view('admin.classes.academic.create', [
+        'title' => 'Add Academic Class',
+      ]);
     }
 
     /**
@@ -52,7 +54,7 @@ class AcademicClassYearController extends Controller
             'academic_class_id' => $request->academic_class_id,
             'academic_year_id'  => $request->academic_year_id
         ]);
-        
+
         return redirect('/admin/academic-classes');
     }
 
@@ -108,7 +110,7 @@ class AcademicClassYearController extends Controller
             'academicClass',
             'academicYear'
         ])->get();
-        
+
         return view('admin.classes.transfer', [
             'title' => 'Class Transfer',
             'classes' => $academicClassYears
@@ -116,7 +118,7 @@ class AcademicClassYearController extends Controller
     }
 
     public function transferClass(Request $request)
-    {   
+    {
         $students = StudentClass::where([
             'academic_class_year_id' => $request->academic_class_year_id_to_transfer,
         ])->get();
@@ -131,7 +133,7 @@ class AcademicClassYearController extends Controller
         return redirect()->back();
     }
 
-    public function homeroom() 
+    public function homeroom()
     {
         $academicClassYears = AcademicClassYear::with([
             'studentClasses',

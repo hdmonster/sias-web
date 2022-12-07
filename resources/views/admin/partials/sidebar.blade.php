@@ -19,7 +19,7 @@
               data-feather="file-text" class="feather-icon"></i><span class="user">Teachers </span></a>
           <ul aria-expanded="false" class="collapse  first-level base-level-line">
             <li class="sidebar-item">
-              <a href="{{ route('admin.teachers.create') }}" class="sidebar-link" >
+              <a href="{{ route('admin.teachers.create') }}" class="sidebar-link">
                 <span class="hide-menu"> Add new
                 </span>
               </a>
@@ -82,7 +82,7 @@
           </a>
           <ul aria-expanded="false" class="collapse first-level base-level-line">
             <li class="sidebar-item">
-              <a href="#" class="sidebar-link" data-toggle="modal" data-target="#addAcademicClassModal">
+              <a href="{{ route('admin.academic-years.create') }}" class="sidebar-link">
                 <span class="hide-menu">
                   Add Academic Class
                 </span>
@@ -131,12 +131,12 @@
                   'academicClass',
                   'academicYear'
               ])->get();
-              
+
               $subjects = Subject::all();
-              
+
               foreach ($academicClassYearsSide as $academicClassYearSide) {
                 $subjectItems = "";
-              
+
                 foreach ($subjects as $subject) {
                   $subjectItems .= '
                   <li class="sidebar-item">
@@ -149,7 +149,7 @@
                 }
 
                 echo '
-                <li class="sidebar-item"> 
+                <li class="sidebar-item">
                   <a class="has-arrow sidebar-link" href="javascript:void(0)"
                     aria-expanded="false">
                     <span class="hide-menu">
@@ -166,7 +166,7 @@
                 </li>
                 ';
               }
-            
+
             ?>
           </ul>
         </li>
