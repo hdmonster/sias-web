@@ -146,17 +146,19 @@ class AcademicClassYearController extends Controller
 
     public function transferClass(Request $request)
     {   
+        // dd($request->all());
         $students = StudentClass::where([
             'academic_class_year_id' => $request->academic_class_year_id_to_transfer,
         ])->get();
-
+        
+        // dd($students);
         foreach ($students as $student) {
             StudentClass::create([
                 'academic_class_year_id' => $request->academic_class_year_id,
-                'student_id' => $student->id
+                'student_id' => $student->student_id
             ]);
         }
-
+        
         return redirect()->back();
     }
 

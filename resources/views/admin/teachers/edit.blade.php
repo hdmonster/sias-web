@@ -27,6 +27,7 @@
                         <span class="invalid-feedback">{{ $message }}</span>
                     @enderror
                 </div>
+                <input type="hidden" name="old_nip" value="{{ $teacher->nip }}">
 
                 <div class="form-group">
                     <label for="atPassword">Password</label>

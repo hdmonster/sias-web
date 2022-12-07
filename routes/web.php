@@ -50,7 +50,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
                 $count += $academicScore->score;
                 $i += 1;
             }
-            $rate = (2 * $count)/$i;
+            $rate = $count/$i;
 
             return view('admin.dashboard.index', [
                 'title' => 'Dashboard',

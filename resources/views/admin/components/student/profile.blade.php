@@ -23,12 +23,12 @@
               <span class="d-none d-lg-block">Personal</span>
             </a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="#strength-b2" data-toggle="tab" aria-expanded="false" class="nav-link">
               <i class="mdi mdi-settings-outline d-lg-none d-block mr-1"></i>
               <span class="d-none d-lg-block">Strength/Weakness</span>
             </a>
-          </li>
+          </li> -->
         </ul>
 
         <div class="tab-content">
