@@ -46,17 +46,21 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
             $count = 0;
             $i = 0;
 
-            foreach ($academicScores as $academicScore) {
-                $count += $academicScore->score;
-                $i += 1;
+            if($academicScores->count() > 0){
+                foreach ($academicScores as $academicScore) {
+                    $count += $academicScore->score;
+                    $i += 1;
+                }
+                $rate = $count/$i;
+            }else{
+                $rate = 0;
             }
-            $rate = $count/$i;
 
             return view('admin.dashboard.index', [
                 'title' => 'Dashboard',
                 'rate' => $rate,
-                'total_students' => Student::all()->count(),
-                'total_teachers' => Teacher::all()->count()
+                'total_students' => Student::where('status','active')->get()->count(),
+                'total_teachers' => Teacher::where('status','active')->get()->count()
             ]);
         })->name('index');
     

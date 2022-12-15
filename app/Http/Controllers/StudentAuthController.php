@@ -26,11 +26,11 @@ class StudentAuthController extends Controller
 
 		$credential = $request->only('nisn', 'password');
 
-		if(Auth::guard('student')->attempt($credential)){
+		if(Auth::guard('student')->attempt($credential) && Auth::guard('student')->user()->status == 'active'){
 			return redirect()->route('students.dashboard');
 		}
 
-		return redirect()->route('students.login')->with('error', 'nisn atau password yang anda masukkan salah. Silahkan coba lagi.');
+		return redirect()->route('students.login')->with('error', 'NISN atau password yang anda masukkan salah. Silahkan coba lagi.');
 	}
 
 	public function logout(Request $request){

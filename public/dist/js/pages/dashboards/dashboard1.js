@@ -8,8 +8,6 @@ $(function () {
         let data = await response.json()  
         let labels = data.labels;
         let scores = data.scores;
-        // console.log(scores)
-        // console.log(Object.values(scores.final_term))
         subjectChart(labels,scores)
     
         // academicChart(labels, scores)

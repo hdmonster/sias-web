@@ -40,9 +40,15 @@
                   {{ $current_class }}
                 </td>
                 <td>
+                  @if($student->status == 'active')
                   <button class="btn btn-rounded btn-success text-capitalize" disabled>
                     {{ $student->status }}
                   </button>
+                  @else
+                  <button class="btn btn-rounded btn-danger text-capitalize" disabled>
+                    {{ $student->status }}
+                  </button>
+                  @endif
                 </td>
                 <td>
                   <button class="btn btn-circle btn-primary mr-2" data-id="{{ $student->id }}"

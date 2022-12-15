@@ -128,14 +128,14 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        $student->delete();
+        $student->update(['status' => 'inactive']);
 
         return redirect('/admin/students')->with('success', 'Data berhasil dihapus!');
     }
 
     public function assignClassIndex()
     {
-        $students = Student::with('studentClasses.academicClassYear.academicClass')->get();
+        $students = Student::with('studentClasses.academicClassYear.academicClass')->where('status', 'active')->get();
 
         return view('admin.students.assign-class', [
             'title' => 'Assign Class',

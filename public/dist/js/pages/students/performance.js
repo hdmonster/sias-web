@@ -16,7 +16,7 @@ $(function () {
   getDataPerformance(apiPerformance)
 
   function performanceChart(labels, finalTerm, midTerm, others){
-    new Chart(document.querySelector("#radar-chart"), {
+    chart = new Chart(document.querySelector("#radar-chart"), {
       type: 'radar',
       data: {
         labels: labels,
@@ -53,8 +53,8 @@ $(function () {
       },
       options: {
         title: {
-        display: true,
-        text: 'Subject Dominance'
+          display: true,
+          text: 'Subject Dominance'
         }
       }
     });
