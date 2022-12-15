@@ -8,6 +8,7 @@ $(function () {
     let finalTerm = Object.values(scores.final_term);
     let midTerm = Object.values(scores.mid_term);
     let others = Object.values(scores.others);
+    console.log(finalTerm)
     // console.log(Object.values(scores.final_term))
     performanceChart(labels,finalTerm,midTerm,others)
 
@@ -55,6 +56,13 @@ $(function () {
         title: {
           display: true,
           text: 'Subject Dominance'
+        },
+        tooltips: {
+          callbacks: {
+            label: function(tooltipItem, data) {
+              return data.datasets[tooltipItem.datasetIndex].label + ": " + tooltipItem.yLabel;
+            }
+          }
         }
       }
     });
