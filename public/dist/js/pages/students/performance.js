@@ -8,6 +8,7 @@ $(function () {
     let finalTerm = Object.values(scores.final_term);
     let midTerm = Object.values(scores.mid_term);
     let others = Object.values(scores.others);
+    console.log(finalTerm)
     // console.log(Object.values(scores.final_term))
     performanceChart(labels,finalTerm,midTerm,others)
 
@@ -16,7 +17,7 @@ $(function () {
   getDataPerformance(apiPerformance)
 
   function performanceChart(labels, finalTerm, midTerm, others){
-    new Chart(document.querySelector("#radar-chart"), {
+    chart = new Chart(document.querySelector("#radar-chart"), {
       type: 'radar',
       data: {
         labels: labels,
@@ -53,8 +54,15 @@ $(function () {
       },
       options: {
         title: {
-        display: true,
-        text: 'Subject Dominance'
+          display: true,
+          text: 'Subject Dominance'
+        },
+        tooltips: {
+          callbacks: {
+            label: function(tooltipItem, data) {
+              return data.datasets[tooltipItem.datasetIndex].label + ": " + tooltipItem.yLabel;
+            }
+          }
         }
       }
     });

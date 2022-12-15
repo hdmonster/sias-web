@@ -37,7 +37,7 @@
 
                 <div class="form-group">
                     <fieldset class="row mb-3">
-                        <legend class="col-form-label col-sm-2 pt-0">Radios</legend>
+                        <legend class="col-form-label col-sm-2 pt-0">Gender</legend>
                         <div class="col-sm-10">
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="gender" id="male" value="male" @if(old('gender') == 'male') checked @endif>

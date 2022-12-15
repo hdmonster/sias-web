@@ -11,7 +11,7 @@
         <table class="table" width="100%">
           <tr>
             <td>Class</td>
-            <td>{{ Auth::guard('student')->user()->studentClasses->first()->academicClassYear->academicClass->class_name }}</td>
+            <td>{{ Auth::guard('student')->user()->studentClasses->count() > 0 ? Auth::guard('student')->user()->studentClasses->first()->academicClassYear->academicClass->class_name  : 0}}</td>
           </tr>
           <tr>
             <td>Gender</td>
