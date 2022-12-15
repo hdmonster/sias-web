@@ -53,11 +53,12 @@ class StudentController extends Controller
             'address' => 'required'
         ]);
 
+        $birthday = strtotime($request->birthday);
+
         $validatedData['password'] = bcrypt($request->nisn);
-        $validatedData['birth_place_and_date'] = $request->birthplace . ', ' . $request->birthday;
+        $validatedData['birth_place_and_date'] = $request->birthplace . ', ' . date('d M Y', $birthday);
 
         Student::create($validatedData);
-
         return redirect('/admin/students')->with('success', 'Data berhasil ditambahkan!');
     }
 
