@@ -22,48 +22,37 @@
           </a>
 
           <ul aria-expanded="false" class="collapse first-level base-level-line">
+            @if(Auth::guard('student')->user()->studentClasses->count() > 0)
+              @php 
+                $studentClasses = Auth::guard('student')->user()->studentClasses;
+              @endphp
 
-            <?php
-              use App\Models\AcademicClassYear;
-
-              $academicClassYearsSide = AcademicClassYear::with([
-                  'academicClass',
-                  'academicYear'
-              ])->get();
-              
-              
-              foreach ($academicClassYearsSide as $academicClassYearSide) {
-                echo '
-                <li class="sidebar-item"> 
+              @foreach($studentClasses as $class)
+                <li class="sidebar-item">
                   <a class="has-arrow sidebar-link" href="javascript:void(0)"
-                    aria-expanded="false">
-                    <span class="hide-menu">
-                      '. $academicClassYearSide->academicClass->class_name .' ('. $academicClassYearSide->academicYear->year .')
-                    </span>
+                      aria-expanded="false">
+                      <span class="hide-menu"> {{ $class->academicClassYear->academicClass->class_name }} ( {{$class->academicClassYear->academicYear->year}} ) </span>
                   </a>
 
                   <ul aria-expanded="false" class="collapse second-level base-level-line">
                     <li class="sidebar-item">
-                      <a href="/student/rapor/'. $academicClassYearSide->id .'/score" class="sidebar-link">
-                        <span class="hide-menu">
+                      <a href="/student/rapor/{{ $class->academicClassYear->id }}/score" class="sidebar-link">
+                          <span class="hide-menu">
                           Score
-                        </span>
+                          </span>
                       </a>
-                    </li>
-                    <li class="sidebar-item">
-                      <a href="/student/rapor/'. $academicClassYearSide->id .'/performance" class="sidebar-link">
-                        <span class="hide-menu">
+                      </li>
+                      <li class="sidebar-item">
+                      <a href="/student/rapor/{{ $class->academicClassYear->id }}/performance" class="sidebar-link">
+                          <span class="hide-menu">
                           Performance
-                        </span>
+                          </span>
                       </a>
                     </li>
                   </ul>
-
                 </li>
-                ';
-              }
-            
-            ?>
+              @endforeach
+            @endif
 
           </ul>
         </li>
